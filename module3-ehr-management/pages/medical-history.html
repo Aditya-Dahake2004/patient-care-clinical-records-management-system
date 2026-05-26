@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical History - CareRecords</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="../../common/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<aside class="sidebar">
+    <div class="sidebar-brand text-primary fw-bold">CareRecords EHR</div>
+    <ul class="sidebar-menu">
+
+        <li class="menu-header">EHR Records</li>
+        <li class="sidebar-item"><a href="../index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+        <li class="sidebar-item"><a href="create-encounter.html"><i class="bi bi-file-earmark-plus"></i><span>Create Encounter</span></a></li>
+        <li class="sidebar-item"><a href="medical-history.html" class="active"><i class="bi bi-folder2-open"></i><span>Medical History</span></a></li>
+        <li class="sidebar-item"><a href="diagnosis-tracking.html"><i class="bi bi-activity"></i><span>Diagnosis Tracking</span></a></li>
+        <li class="sidebar-item"><a href="clinical-notes.html"><i class="bi bi-file-text"></i><span>Clinical Notes</span></a></li>
+        <li class="sidebar-item"><a href="vitals-summary.html"><i class="bi bi-heart-pulse"></i><span>Vitals Summary</span></a></li>
+    </ul>
+</aside>
+
+<div class="main-content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border rounded-3 p-2 mb-3 shadow-sm">
+        <div class="container-fluid">
+            <button class="btn btn-sm btn-light sidebar-toggle-btn border d-lg-none me-2"><i class="bi bi-list"></i></button>
+            <span class="navbar-brand fw-bold text-primary mb-0 fs-6">Patient Clinical File Summary</span>
+            <button class="btn btn-sm btn-outline-primary ms-auto"><i class="bi bi-printer me-1"></i> Print Chart</button>
+        </div>
+    </nav>
+
+    <div class="bg-white p-3 rounded border shadow-sm mb-4">
+        <h6 class="fw-bold text-dark mb-3 border-bottom pb-2"><i class="bi bi-search text-primary me-2"></i>Search Medical Records</h6>
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-md-3">
+                <label class="form-label small fw-bold text-secondary mb-1">1. Attending Doctor</label>
+                <select class="form-select form-select-sm" id="search-doctor">
+                    <option value="">Select Doctor...</option>
+                    <option value="Dr. Smith">Dr. Smith (General Practice)</option>
+                    <option value="Dr. Patel">Dr. Patel (Cardiology)</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-3">
+                <label class="form-label small fw-bold text-secondary mb-1">2. Encounter Date</label>
+                <input type="date" class="form-control form-control-sm" id="search-date" title="Select Year, Month, and Date">
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label small fw-bold text-secondary mb-1">3. Select Patient Name</label>
+                <select class="form-select form-select-sm" id="search-patient">
+                    <option value="">Select Patient...</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-2">
+                <button id="btn-load-chart" class="btn btn-sm btn-primary w-100 fw-bold"><i class="bi bi-file-earmark-medical me-1"></i> Load Chart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card metric-card p-4">
+        <div class="d-flex align-items-center p-3 mb-4 bg-primary bg-opacity-10 rounded border border-primary-subtle">
+            <i class="bi bi-person-bounding-box fs-1 text-primary me-3"></i>
+            <div class="flex-grow-1">
+                <h5 class="mb-1 fw-bold text-primary" id="history-patient-name">Awaiting Selection...</h5>
+                <div class="text-secondary small d-flex gap-3 flex-wrap">
+                    <span><strong>MRN:</strong> <span id="history-patient-mrn">--</span></span>
+                    <span><strong>DOB:</strong> --/--/---- (Age: --)</span>
+                    <span><strong>Gender:</strong> Unspecified</span>
+                    <span class="ms-auto text-danger fw-bold"><i class="bi bi-exclamation-triangle-fill me-1"></i> Allergies: NKDA</span>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold text-dark mb-3">Encounter History & Notes</h6>
+        <div class="table-responsive">
+            <table class="table table-sm table-hover table-striped border">
+                <thead class="table-light">
+                <tr>
+                    <th>Encounter Date</th>
+                    <th>Diagnosis Code</th>
+                    <th>Vitals (BP)</th>
+                    <th>Clinical Notes</th>
+                </tr>
+                </thead>
+                <tbody id="history-table-body">
+                <tr><td colspan="4" class="text-center py-4 text-muted"><i class="bi bi-search fs-3 d-block mb-2"></i>Use the search tools above to load a patient's medical history.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../common/js/mock-data.js"></script>
+<script src="../../common/js/main.js"></script>
+<script src="../js/ehr-app.js"></script>
+</body>
+</html>
