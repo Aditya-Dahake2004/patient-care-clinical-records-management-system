@@ -1,0 +1,13 @@
+/* Reusable footer styling */
+.public-footer {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+}
+.public-footer a {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.public-footer a:hover {
+    color: #ffffff;
+}

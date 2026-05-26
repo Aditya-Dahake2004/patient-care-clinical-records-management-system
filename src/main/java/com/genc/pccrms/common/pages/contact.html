@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CareRecord Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/contact.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="home.html">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </a>
+            <div class="collapse navbar-collapse" id="publicNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link text-secondary" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-semibold" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="login.html" class="btn btn-outline-primary btn-sm px-3 fw-semibold">Sign In</a>
+                    <a href="register.html" class="btn btn-primary btn-sm px-3 fw-semibold">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold text-dark">Get in Touch</h1>
+                <p class="text-secondary max-width-600 mx-auto">Connecting you to our outpatient receptionists, clinical care departments, and billing desks.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Contact info -->
+                <div class="col-lg-5">
+                    <div class="card border-0 clinic-card p-4 h-100">
+                        <h4 class="fw-bold text-dark mb-4"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Our Coordinates</h4>
+                        
+                        <div class="d-flex align-items-start gap-3 mb-4">
+                            <div class="contact-icon-box flex-shrink-0">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-dark">Support Hotline</h6>
+                                <p class="small text-secondary mb-0">+1 (555) 019-2000</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start gap-3 mb-4">
+                            <div class="contact-icon-box flex-shrink-0">
+                                <i class="bi bi-envelope-at-fill"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-dark">Clinical Administration</h6>
+                                <p class="small text-secondary mb-0">care-inquiries@carerecord.med.org</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start gap-3 mb-4">
+                            <div class="contact-icon-box flex-shrink-0">
+                                <i class="bi bi-hospital"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1 text-dark">Hospital Location Address</h6>
+                                <p class="small text-secondary mb-0">123 Healthway Blvd, Medical Plaza Suite 100</p>
+                            </div>
+                        </div>
+
+                        <!-- Map placeholder -->
+                        <div class="map-placeholder">
+                            <div class="text-center p-3">
+                                <i class="bi bi-map fs-2 mb-2 d-block text-primary"></i>
+                                <span class="small fw-semibold">Interactive Directions Map Sandbox</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form column -->
+                <div class="col-lg-7">
+                    <div class="card border-0 clinic-card p-4 h-100">
+                        <h4 class="fw-bold text-dark mb-3"><i class="bi bi-send-fill text-primary me-2"></i>Send Direct Message</h4>
+                        <p class="text-muted small mb-4">Have an administrative query, insurance pre-authorization question, or general health concerns? Write to us.</p>
+                        
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="contactName" class="form-label small fw-semibold text-dark">Your Name</label>
+                                <input type="text" class="form-control" id="contactName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactEmail" class="form-label small fw-semibold text-dark">Your Email Address</label>
+                                <input type="email" class="form-control" id="contactEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactMsg" class="form-label small fw-semibold text-dark">Your Inquiry Message</label>
+                                <textarea class="form-control" id="contactMsg" rows="5" required placeholder="Type your concerns here..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm px-4 py-2 fw-semibold"><i class="bi bi-send me-1"></i> Send Feedback Query</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-secondary py-5">
+        <div class="container text-center">
+            <p class="small text-secondary-50">© 2026 Patient Care & Clinical Records Management System. Certified Healthcare Station.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../js/common.js"></script>
+    <!-- Contact Specific JS -->
+    <script src="../js/contact.js"></script>
+</body>
+</html>
