@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Details - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/invoice.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="d-print-none">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="billing-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="generate-invoice.html" class="list-group-item">
+                    <i class="bi bi-file-earmark-plus"></i> Generate Invoice
+                </a>
+                <a href="invoice-list.html" class="list-group-item active">
+                    <i class="bi bi-receipt"></i> Invoice List
+                </a>
+                <a href="payment-records.html" class="list-group-item">
+                    <i class="bi bi-cash-coin"></i> Payment Records
+                </a>
+                <a href="insurance-claims.html" class="list-group-item">
+                    <i class="bi bi-shield-plus"></i> Insurance Claims
+                </a>
+                <a href="payment-history.html" class="list-group-item">
+                    <i class="bi bi-clock-history"></i> Payment History
+                </a>
+                <a href="billing-settings.html" class="list-group-item">
+                    <i class="bi bi-gear-fill"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom d-print-none">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Invoice details Summary</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Clara Oswald</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Accounts Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <!-- Action bar (hidden in print) -->
+                <div class="card clinic-card p-3 mb-4 d-print-none">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="window.history.back()">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Ledger
+                        </button>
+                        <div class="d-flex gap-2">
+                            <button id="printInvoiceBtn" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-printer me-1"></i> Print Statement
+                            </button>
+                            <a id="payNowBtn" class="btn btn-success btn-sm d-none">
+                                <i class="bi bi-cash-coin me-1"></i> Pay Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Printable Invoice Sheet -->
+                <div class="invoice-print-sheet">
+                    <!-- Invoice Header -->
+                    <div class="d-flex justify-content-between align-items-start invoice-header-line mb-4 flex-wrap gap-2">
+                        <div>
+                            <h2 class="h4 fw-bold text-primary mb-1"><i class="bi bi-heart-pulse-fill me-2"></i>CareRecord</h2>
+                            <p class="text-muted small mb-0">100 Clinical Parkway, Metro City<br>Phone: +1 555-0100 | billing@carerecord.com</p>
+                        </div>
+                        <div class="text-sm-end">
+                            <h3 class="h5 fw-bold text-dark mb-1">INVOICE STATEMENT</h3>
+                            <span id="invNoTitle" class="fw-semibold text-primary">#INV-00000</span>
+                        </div>
+                    </div>
+
+                    <!-- Invoice metadata (Client, dates, terms) -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-6">
+                            <span class="text-muted small fw-semibold uppercase d-block">Billed To:</span>
+                            <span class="fw-bold text-dark" id="patName">-</span>
+                            <p class="text-muted small mb-0" id="patPhone">MRN: <span id="patMRN">-</span></p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <span class="text-muted small fw-semibold uppercase d-block">Invoice Metadata:</span>
+                            <p class="text-muted small mb-0">
+                                Date of Issue: <span class="fw-semibold text-dark" id="invDate">-</span><br>
+                                Payment Status: <span id="invStatusBadge" class="invoice-badge Pending">Pending</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Itemized Breakdown table -->
+                    <table class="table table-custom mb-4">
+                        <thead>
+                            <tr>
+                                <th>Clinical Service Description</th>
+                                <th class="text-end">Itemized Charges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Outpatient Practitioner Consultation Fee</td>
+                                <td class="text-end" id="lblConsult">$100.00</td>
+                            </tr>
+                            <tr>
+                                <td>Hospital Pharmacy Medicine Dispensations</td>
+                                <td class="text-end" id="lblMedicine">$80.00</td>
+                            </tr>
+                            <!-- Subtotals & Taxes -->
+                            <tr class="border-top">
+                                <td class="text-end fw-semibold">Clinical Subtotal:</td>
+                                <td class="text-end fw-semibold" id="lblSubtotal">$180.00</td>
+                            </tr>
+                            <tr>
+                                <td class="text-end text-muted small">Estimated Tax (Fixed 10%):</td>
+                                <td class="text-end text-muted small" id="lblTax">$18.00</td>
+                            </tr>
+                            <tr class="bill-total-row">
+                                <td class="text-end text-dark fs-5">Statement Total:</td>
+                                <td class="text-end text-dark fs-5" id="lblTotal">$198.00</td>
+                            </tr>
+                            <tr class="text-primary fw-medium">
+                                <td class="text-end small">Adjudicated Payer Pre-auth:</td>
+                                <td class="text-end small" id="lblInsurance">($150.00)</td>
+                            </tr>
+                            <tr class="bill-total-row border-primary" style="background-color: var(--primary-light);">
+                                <td class="text-end text-primary fs-4">Total Patient Payable:</td>
+                                <td class="text-end text-primary fs-4" id="lblPayable">$48.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-center text-muted small border-top pt-4">
+                        Thank you for choosing CareRecord. For support regarding clinical invoicing, email billing@carerecord.com
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto d-print-none">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Details Specific JS -->
+    <script src="../js/invoice-details.js"></script>
+</body>
+</html>

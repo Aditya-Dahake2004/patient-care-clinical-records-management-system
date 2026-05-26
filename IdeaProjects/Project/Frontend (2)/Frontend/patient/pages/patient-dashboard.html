@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal Dashboard - CareRecord</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="patient-dashboard.html" class="list-group-item active">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="my-appointments.html" class="list-group-item">
+                    <i class="bi bi-calendar2-check"></i> My Appointments
+                </a>
+                <a href="my-prescriptions.html" class="list-group-item">
+                    <i class="bi bi-prescription2"></i> My Prescriptions
+                </a>
+                <a href="my-medical-history.html" class="list-group-item">
+                    <i class="bi bi-file-earmark-medical"></i> EMR History
+                </a>
+                <a href="my-bills.html" class="list-group-item">
+                    <i class="bi bi-credit-card"></i> My Bills
+                </a>
+                <a href="patient-profile.html" class="list-group-item">
+                    <i class="bi bi-person-bounding-box"></i> Profile
+                </a>
+                <a href="patient-settings.html" class="list-group-item">
+                    <i class="bi bi-sliders"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Patient Wellness Station</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold" id="topNavPatientName">John Doe</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="patient-profile.html"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="patient-settings.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <!-- Welcome Banner -->
+                <div class="card clinic-card p-4 mb-4 border-0 text-white" style="background: linear-gradient(135deg, var(--primary-color) 0%, #0d9488 100%);">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-circle bg-white text-primary text-uppercase" id="welcomeAvatar">JD</div>
+                        <div>
+                            <h3 class="fw-bold mb-1" id="lblWelcomeName">Welcome Back, John Doe</h3>
+                            <p class="mb-0 text-white-50">MRN: <strong class="text-white" id="lblMrn">MRN-10824</strong> | Access your hospital clinical charts, visit schedules, and health records securely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats/Metrics Cards Grid -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="card clinic-card p-3 metric-card">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small text-uppercase fw-semibold d-block">Appointments</span>
+                                    <h3 class="fw-bold mb-0 mt-1" id="cntAppointments">1</h3>
+                                </div>
+                                <div class="bg-primary-light text-primary rounded p-3">
+                                    <i class="bi bi-calendar2-week fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card clinic-card p-3 metric-card">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small text-uppercase fw-semibold d-block">Active Rxs</span>
+                                    <h3 class="fw-bold mb-0 mt-1" id="cntPrescriptions">0</h3>
+                                </div>
+                                <div class="bg-info-subtle text-info rounded p-3">
+                                    <i class="bi bi-prescription fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card clinic-card p-3 metric-card">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small text-uppercase fw-semibold d-block">Outstanding Bills</span>
+                                    <h3 class="fw-bold mb-0 mt-1" id="cntBills">0</h3>
+                                </div>
+                                <div class="bg-warning-subtle text-warning rounded p-3">
+                                    <i class="bi bi-cash-stack fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card clinic-card p-3 metric-card">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small text-uppercase fw-semibold d-block">Medical Charts</span>
+                                    <h3 class="fw-bold mb-0 mt-1" id="cntHistory">0</h3>
+                                </div>
+                                <div class="bg-success-subtle text-success rounded p-3">
+                                    <i class="bi bi-journal-medical fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Left Column: Upcoming Appointment & Quick Actions -->
+                    <div class="col-lg-7">
+                        <div class="card clinic-card p-4 mb-4">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-clock-history me-2"></i>Upcoming Visit Schedule</h5>
+                            <div id="upcomingApptContainer">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="card clinic-card p-4">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-prescription2 me-2"></i>Recent Prescribed Medicines</h5>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-sm table-borderless mb-0">
+                                    <thead>
+                                        <tr class="border-bottom text-muted small">
+                                            <th>Medicine & Dosage</th>
+                                            <th>Frequency</th>
+                                            <th>Date Prescribed</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentPrescBody">
+                                        <!-- Loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Quick Portal Actions -->
+                    <div class="col-lg-5">
+                        <div class="card clinic-card p-4">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-lightning-fill me-2"></i>Quick Actions</h5>
+                            
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <a href="my-appointments.html" class="card p-3 text-center action-btn-card text-decoration-none border rounded">
+                                        <i class="bi bi-calendar-plus text-primary fs-3 mb-2"></i>
+                                        <span class="fw-semibold small text-dark d-block">View Schedules</span>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="my-medical-history.html" class="card p-3 text-center action-btn-card text-decoration-none border rounded">
+                                        <i class="bi bi-journal-check text-success fs-3 mb-2"></i>
+                                        <span class="fw-semibold small text-dark d-block">View EMR Logs</span>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="my-bills.html" class="card p-3 text-center action-btn-card text-decoration-none border rounded">
+                                        <i class="bi bi-credit-card-2-front text-warning fs-3 mb-2"></i>
+                                        <span class="fw-semibold small text-dark d-block">Settle Bills</span>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="patient-profile.html" class="card p-3 text-center action-btn-card text-decoration-none border rounded">
+                                        <i class="bi bi-person-vcard text-info fs-3 mb-2"></i>
+                                        <span class="fw-semibold small text-dark d-block">My Profile</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Secured Wellness Portal.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Dashboard Specific JS -->
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

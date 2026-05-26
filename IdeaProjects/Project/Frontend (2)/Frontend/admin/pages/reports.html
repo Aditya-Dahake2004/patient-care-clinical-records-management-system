@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Reports - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/reports.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="admin-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="manage-doctors.html" class="list-group-item">
+                    <i class="bi bi-person-badge"></i> Manage Doctors
+                </a>
+                <a href="manage-staff.html" class="list-group-item">
+                    <i class="bi bi-people"></i> Manage Staff
+                </a>
+                <a href="reports.html" class="list-group-item active">
+                    <i class="bi bi-graph-up-arrow"></i> Reports
+                </a>
+                <a href="settings.html" class="list-group-item">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">System Reports</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Dr. Alex Mercer</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                    <div>
+                        <h2 class="h4 fw-bold text-dark mb-1">Hospital Activity & Financial Reports</h2>
+                        <p class="text-muted mb-0">Review longitudinal health stats and billing aggregates.</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" id="reportMonthFilter" style="width: 160px;">
+                            <option value="May 2026">May 2026</option>
+                            <option value="April 2026">April 2026</option>
+                            <option value="March 2026">March 2026</option>
+                        </select>
+                        <button id="exportPdfBtn" class="btn btn-outline-danger">
+                            <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                        </button>
+                        <button id="exportCsvBtn" class="btn btn-outline-success">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="card clinic-card p-3">
+                            <div class="report-summary-box">
+                                <span class="text-muted small fw-semibold">Billing Generated</span>
+                                <h3 class="h2 fw-bold text-dark mt-1">$58,400</h3>
+                                <p class="text-success small mb-0"><i class="bi bi-arrow-up-short"></i> 14.2% up from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card clinic-card p-3">
+                            <div class="report-summary-box success">
+                                <span class="text-muted small fw-semibold">Claims Approved</span>
+                                <h3 class="h2 fw-bold text-dark mt-1">$41,200</h3>
+                                <p class="text-muted small mb-0"><span class="badge bg-success-subtle text-success">88% Approval Rate</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card clinic-card p-3">
+                            <div class="report-summary-box warning">
+                                <span class="text-muted small fw-semibold">Patient Visits</span>
+                                <h3 class="h2 fw-bold text-dark mt-1">142 Visits</h3>
+                                <p class="text-muted small mb-0">Avg 8.3 consultations/day</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytical Layout (Visual linear bars + Summary tables) -->
+                <div class="row g-4 mb-4">
+                    <!-- Department Activity Load -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card clinic-card p-4 h-100">
+                            <h3 class="h5 fw-bold text-dark mb-4">Department Appointment Load</h3>
+                            <div class="d-flex flex-column gap-3">
+                                <div>
+                                    <div class="d-flex justify-content-between text-dark fw-medium small">
+                                        <span>Cardiology Department</span>
+                                        <span>65% Capacity</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill-cardiology"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between text-dark fw-medium small">
+                                        <span>Pediatrics</span>
+                                        <span>45% Capacity</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill-pediatrics"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between text-dark fw-medium small">
+                                        <span>Neurology</span>
+                                        <span>30% Capacity</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill-neurology"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between text-dark fw-medium small">
+                                        <span>Orthopedics</span>
+                                        <span>55% Capacity</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill-orthopedics"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-light rounded small text-muted">
+                                <i class="bi bi-info-circle me-1"></i> Data aggregates reflect appointments confirmed and processed.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical & Operations Reports Summary -->
+                    <div class="col-12 col-lg-7">
+                        <div class="card clinic-card h-100">
+                            <div class="card-header bg-white border-0 py-3">
+                                <h3 class="h5 fw-bold text-dark mb-0">Insurance Claims Summary</h3>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive border-0 rounded-0">
+                                    <table class="table table-custom align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Claim ID</th>
+                                                <th>Patient Details</th>
+                                                <th>Billing Provider</th>
+                                                <th>Amount</th>
+                                                <th>Claim Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-semibold">#CLM-1204</td>
+                                                <td>John Doe</td>
+                                                <td>Blue Cross Shield</td>
+                                                <td>$1,250.00</td>
+                                                <td><span class="badge badge-custom bg-success-subtle text-success">Approved</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold">#CLM-1205</td>
+                                                <td>Alice Vance</td>
+                                                <td>Medicaid Payer</td>
+                                                <td>$420.00</td>
+                                                <td><span class="badge badge-custom bg-success-subtle text-success">Approved</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold">#CLM-1206</td>
+                                                <td>David Miller</td>
+                                                <td>Aetna Healthcare</td>
+                                                <td>$2,100.00</td>
+                                                <td><span class="badge badge-custom bg-warning-subtle text-warning">Pending</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold">#CLM-1207</td>
+                                                <td>Elena Rostova</td>
+                                                <td>Cigna Partners</td>
+                                                <td>$950.00</td>
+                                                <td><span class="badge badge-custom bg-danger-subtle text-danger">Rejected</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Reports JS -->
+    <script src="../js/reports.js"></script>
+</body>
+</html>

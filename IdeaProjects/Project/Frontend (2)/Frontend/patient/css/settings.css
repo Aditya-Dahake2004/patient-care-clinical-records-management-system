@@ -1,0 +1,5 @@
+/* Patient account settings styling */
+.settings-toggle-card {
+    background-color: #f8fafc;
+    border: 1px solid var(--border-color);
+}

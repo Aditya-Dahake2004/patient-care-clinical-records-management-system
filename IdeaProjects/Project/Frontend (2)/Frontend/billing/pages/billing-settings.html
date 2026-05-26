@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing System Settings - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/settings.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="billing-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="generate-invoice.html" class="list-group-item">
+                    <i class="bi bi-file-earmark-plus"></i> Generate Invoice
+                </a>
+                <a href="invoice-list.html" class="list-group-item">
+                    <i class="bi bi-receipt"></i> Invoice List
+                </a>
+                <a href="payment-records.html" class="list-group-item">
+                    <i class="bi bi-cash-coin"></i> Payment Records
+                </a>
+                <a href="insurance-claims.html" class="list-group-item">
+                    <i class="bi bi-shield-plus"></i> Insurance Claims
+                </a>
+                <a href="payment-history.html" class="list-group-item">
+                    <i class="bi bi-clock-history"></i> Payment History
+                </a>
+                <a href="billing-settings.html" class="list-group-item active">
+                    <i class="bi bi-gear-fill"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Billing Configuration & Settings</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Clara Oswald</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Accounts Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="row g-4">
+                    <!-- Left Settings Category Selection Column -->
+                    <div class="col-lg-3">
+                        <div class="card clinic-card p-3">
+                            <h6 class="fw-bold text-uppercase text-muted px-2 mb-3" style="font-size: 0.75rem;">Configurations</h6>
+                            <div class="nav flex-column nav-pills" id="settings-tabs" role="tablist" aria-orientation="vertical">
+                                <button class="nav-link active text-start py-2 px-3 mb-2 border-0 rounded" id="tax-tab" data-bs-toggle="pill" data-bs-target="#tab-tax" type="button" role="tab" aria-controls="tab-tax" aria-selected="true">
+                                    <i class="bi bi-percent me-2"></i> Tax & Currency Rates
+                                </button>
+                                <button class="nav-link text-start py-2 px-3 mb-2 border-0 rounded" id="payer-tab" data-bs-toggle="pill" data-bs-target="#tab-payer" type="button" role="tab" aria-controls="tab-payer" aria-selected="false">
+                                    <i class="bi bi-shield-plus me-2"></i> Insurance Integration
+                                </button>
+                                <button class="nav-link text-start py-2 px-3 mb-2 border-0 rounded" id="template-tab" data-bs-toggle="pill" data-bs-target="#tab-template" type="button" role="tab" aria-controls="tab-template" aria-selected="false">
+                                    <i class="bi bi-file-earmark-pdf me-2"></i> Invoice Templates
+                                </button>
+                                <button class="nav-link text-start py-2 px-3 mb-2 border-0 rounded" id="audit-tab" data-bs-toggle="pill" data-bs-target="#tab-audit" type="button" role="tab" aria-controls="tab-audit" aria-selected="false">
+                                    <i class="bi bi-file-earmark-check me-2"></i> Audit Logs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Tab Content Column -->
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="settings-tabContent">
+                            
+                            <!-- Tab: Tax & Currency -->
+                            <div class="tab-pane fade show active" id="tab-tax" role="tabpanel" aria-labelledby="tax-tab">
+                                <div class="card clinic-card settings-card p-4">
+                                    <h4 class="fw-bold mb-3"><i class="bi bi-percent text-primary me-2"></i>Taxation & Currency Prefs</h4>
+                                    <p class="text-muted small">Configure default tax structures and base pricing rates applied to hospital checkouts and room rents.</p>
+                                    <hr>
+                                    <form id="taxSettingsForm">
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-6">
+                                                <label for="taxRate" class="form-label fw-semibold">Default Outpatient Sales Tax (%)</label>
+                                                <input type="number" step="0.1" class="form-control" id="taxRate" value="10.0" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="currencySymbol" class="form-label fw-semibold">Base Currency Representation</label>
+                                                <select class="form-select" id="currencySymbol">
+                                                    <option value="$">USD ($) - US Dollars</option>
+                                                    <option value="€">EUR (€) - Euro</option>
+                                                    <option value="₹">INR (₹) - Indian Rupee</option>
+                                                    <option value="£">GBP (£) - British Pound</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="consultationFee" class="form-label fw-semibold">Standard Consultation Fee ($)</label>
+                                                <input type="number" class="form-control" id="consultationFee" value="120" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="roomRent" class="form-label fw-semibold">Daily General Ward Room Rent ($)</label>
+                                                <input type="number" class="form-control" id="roomRent" value="250" required>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save Financial Policy</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Tab: Insurance Integration -->
+                            <div class="tab-pane fade" id="tab-payer" role="tabpanel" aria-labelledby="payer-tab">
+                                <div class="card clinic-card settings-card p-4">
+                                    <h4 class="fw-bold mb-3"><i class="bi bi-shield-plus text-primary me-2"></i>Payer Pre-Authorization Settings</h4>
+                                    <p class="text-muted small">Manage live connection states to health insurance providers and sandbox pre-authorization endpoints.</p>
+                                    <hr>
+                                    <form id="payerSettingsForm">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold d-block">Supported Insurance Networks</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="providerAetna" value="Aetna" checked>
+                                                <label class="form-check-label" for="providerAetna">Aetna Healthcare</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="providerCigna" value="Cigna" checked>
+                                                <label class="form-check-label" for="providerCigna">Cigna Insurance</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="providerBlue" value="Blue Cross" checked>
+                                                <label class="form-check-label" for="providerBlue">Blue Cross Blue Shield</label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="mockPayerApi" class="form-label fw-semibold">Mock Pre-Authorization Sandbox URL</label>
+                                            <input type="url" class="form-control" id="mockPayerApi" value="https://api.careclinic-sandbox.fhir/payers/v1/auth" required>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="autoFileClaims" checked>
+                                                <label class="form-check-label fw-semibold" for="autoFileClaims">Auto-Generate Insurance Claim on Invoice Save</label>
+                                                <div class="form-text">Instantly saves a matching pending insurance claim record if invoice contains active coverage.</div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save Payer Integration</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Tab: Invoice Templates -->
+                            <div class="tab-pane fade" id="tab-template" role="tabpanel" aria-labelledby="template-tab">
+                                <div class="card clinic-card settings-card p-4">
+                                    <h4 class="fw-bold mb-3"><i class="bi bi-file-earmark-pdf text-primary me-2"></i>Invoice PDF & Print Template</h4>
+                                    <p class="text-muted small">Design parameters applied on client receipt prints and patient records dispatch layouts.</p>
+                                    <hr>
+                                    <form id="templateSettingsForm">
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-6">
+                                                <label for="hospitalName" class="form-label fw-semibold">Hospital Legal Branding Name</label>
+                                                <input type="text" class="form-control" id="hospitalName" value="CareRecord Clinic Ltd." required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="templateColor" class="form-label fw-semibold">Header Theme Primary Accent</label>
+                                                <select class="form-select" id="templateColor">
+                                                    <option value="blue">Healthcare Clinical Blue (Primary)</option>
+                                                    <option value="teal">Sleek Teal Mint</option>
+                                                    <option value="dark">Slate Dark Charcoal</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="receiptNotes" class="form-label fw-semibold">Default Receipt Footer Terms & Remarks</label>
+                                                <textarea class="form-control" id="receiptNotes" rows="3">Thank you for your payment. Keep this copy for insurance claims references.</textarea>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save Layout Preferences</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Tab: Audit Logs -->
+                            <div class="tab-pane fade" id="tab-audit" role="tabpanel" aria-labelledby="audit-tab">
+                                <div class="card clinic-card settings-card p-4">
+                                    <h4 class="fw-bold mb-3"><i class="bi bi-file-earmark-check text-primary me-2"></i>Audit Logs Registry</h4>
+                                    <p class="text-muted small">View local session changes and system configuration adjustments recorded for security audits.</p>
+                                    <hr>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped small align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th>Audit Stamp</th>
+                                                    <th>Event Class</th>
+                                                    <th>Audited Change</th>
+                                                    <th>Actor Role</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="auditLogsBody">
+                                                <!-- Populated dynamically via settings.js -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Settings Specific JS -->
+    <script src="../js/billing-settings.js"></script>
+</body>
+</html>

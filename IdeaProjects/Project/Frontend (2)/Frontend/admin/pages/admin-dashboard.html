@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Dashboard Specific CSS -->
+    <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="admin-dashboard.html" class="list-group-item active">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="manage-doctors.html" class="list-group-item">
+                    <i class="bi bi-person-badge"></i> Manage Doctors
+                </a>
+                <a href="manage-staff.html" class="list-group-item">
+                    <i class="bi bi-people"></i> Manage Staff
+                </a>
+                <a href="reports.html" class="list-group-item">
+                    <i class="bi bi-graph-up-arrow"></i> Reports
+                </a>
+                <a href="settings.html" class="list-group-item">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand d-none d-md-inline-block">Hospital Control Panel</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Dr. Alex Mercer</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Container -->
+            <div class="container-fluid px-4 py-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="h3 fw-bold text-dark mb-1" id="admin-greeting">Good Morning, Admin</h1>
+                        <p class="text-muted mb-0">Here is what's happening at the hospital today.</p>
+                    </div>
+                    <button id="refresh-btn" class="btn btn-outline-primary mt-3 mt-sm-0">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh Stats
+                    </button>
+                </div>
+
+                <!-- KPI Metric Row -->
+                <div class="row g-4 mb-4">
+                    <!-- Metric Card: Total Patients -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card clinic-card p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small fw-semibold uppercase">Total Patients</span>
+                                    <h2 class="h2 fw-bold text-dark mt-1 mb-0">2,450</h2>
+                                </div>
+                                <div class="stat-icon bg-patients">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-success small">
+                                <i class="bi bi-arrow-up-right me-1"></i> 12% increase from last month
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Metric Card: Active Doctors -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card clinic-card p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Active Doctors</span>
+                                    <h2 class="h2 fw-bold text-dark mt-1 mb-0">48</h2>
+                                </div>
+                                <div class="stat-icon bg-doctors">
+                                    <i class="bi bi-person-heart"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-muted small">
+                                <span class="badge bg-success-subtle text-success">3 New Joined</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Metric Card: Appointments Today -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card clinic-card p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Appointments Today</span>
+                                    <h2 id="stat-appointments" class="h2 fw-bold text-dark mt-1 mb-0">18</h2>
+                                </div>
+                                <div class="stat-icon bg-appointments">
+                                    <i class="bi bi-calendar2-check-fill"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-danger small">
+                                <i class="bi bi-exclamation-circle-fill me-1"></i> 2 Pending confirmation
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Metric Card: Monthly Revenue -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card clinic-card p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-muted small fw-semibold">Monthly Revenue</span>
+                                    <h2 id="stat-revenue" class="h2 fw-bold text-dark mt-1 mb-0">$45,200</h2>
+                                </div>
+                                <div class="stat-icon bg-revenue">
+                                    <i class="bi bi-currency-dollar"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-success small">
+                                <i class="bi bi-arrow-up-right me-1"></i> 8.4% growth rate
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Columns -->
+                <div class="row g-4 mb-4">
+                    <!-- Recent Appointments -->
+                    <div class="col-12 col-xl-8">
+                        <div class="card clinic-card h-100">
+                            <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                                <h3 class="h5 fw-bold text-dark mb-0">Recent Appointments</h3>
+                                <a href="reports.html" class="btn btn-link btn-sm text-decoration-none">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive border-0 rounded-0">
+                                    <table class="table table-custom align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Appt ID</th>
+                                                <th>Patient Name</th>
+                                                <th>Doctor Name</th>
+                                                <th>Time</th>
+                                                <th>Status</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-semibold text-primary">#APT-9042</td>
+                                                <td>John Doe</td>
+                                                <td>Dr. Sarah Connor</td>
+                                                <td>09:30 AM</td>
+                                                <td><span class="badge badge-custom bg-success-subtle text-success">Completed</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-primary btn-sm view-appt-btn">Details</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold text-primary">#APT-9043</td>
+                                                <td>Alice Vance</td>
+                                                <td>Dr. Robert Chen</td>
+                                                <td>10:45 AM</td>
+                                                <td><span class="badge badge-custom bg-warning-subtle text-warning">Booked</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-primary btn-sm view-appt-btn">Details</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold text-primary">#APT-9044</td>
+                                                <td>David Miller</td>
+                                                <td>Dr. Emily Blunt</td>
+                                                <td>01:15 PM</td>
+                                                <td><span class="badge badge-custom bg-danger-subtle text-danger">Cancelled</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-primary btn-sm view-appt-btn">Details</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold text-primary">#APT-9045</td>
+                                                <td>Elena Rostova</td>
+                                                <td>Dr. Robert Chen</td>
+                                                <td>02:30 PM</td>
+                                                <td><span class="badge badge-custom bg-warning-subtle text-warning">Booked</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-primary btn-sm view-appt-btn">Details</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Panel: Quick Actions & Recent Patients -->
+                    <div class="col-12 col-xl-4">
+                        <div class="row g-4">
+                            <!-- Quick Actions -->
+                            <div class="col-12">
+                                <div class="card clinic-card p-3">
+                                    <h3 class="h5 fw-bold text-dark mb-3">Quick Actions</h3>
+                                    <div class="d-flex flex-column gap-2">
+                                        <a href="manage-doctors.html" class="quick-action-btn">
+                                            <i class="bi bi-person-plus text-primary fs-5"></i>
+                                            <div>
+                                                <div class="fw-semibold">Add New Doctor</div>
+                                                <div class="text-muted small">Register a new hospital practitioner</div>
+                                            </div>
+                                        </a>
+                                        <a href="manage-staff.html" class="quick-action-btn">
+                                            <i class="bi bi-person-gear text-success fs-5"></i>
+                                            <div>
+                                                <div class="fw-semibold">Manage Hospital Staff</div>
+                                                <div class="text-muted small">Assign and review receptionist/pharmacist roles</div>
+                                            </div>
+                                        </a>
+                                        <a href="reports.html" class="quick-action-btn">
+                                            <i class="bi bi-file-earmark-bar-graph text-warning fs-5"></i>
+                                            <div>
+                                                <div class="fw-semibold">View System Reports</div>
+                                                <div class="text-muted small">Export system and revenue stats</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Patients Section -->
+                            <div class="col-12">
+                                <div class="card clinic-card p-3">
+                                    <h3 class="h5 fw-bold text-dark mb-3">Recent Patient Admissions</h3>
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="patient-avatar">JD</div>
+                                                <div>
+                                                    <div class="fw-semibold small">John Doe</div>
+                                                    <div class="text-muted small">MRN: MRN-50492</div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted small">15 mins ago</span>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="patient-avatar">AV</div>
+                                                <div>
+                                                    <div class="fw-semibold small">Alice Vance</div>
+                                                    <div class="text-muted small">MRN: MRN-50493</div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted small">1 hour ago</span>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="patient-avatar text-primary bg-primary-subtle">DM</div>
+                                                <div>
+                                                    <div class="fw-semibold small">David Miller</div>
+                                                    <div class="text-muted small">MRN: MRN-50494</div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted small">3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Dashboard Specific JS -->
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
