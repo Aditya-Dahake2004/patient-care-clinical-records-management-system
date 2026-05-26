@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reschedule Appointment - CareRecords</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../common/css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">CareRecords Basic</div>
+        <ul class="sidebar-menu">
+          
+            <li class="menu-header">Appointment Scheduling</li>
+            <li class="sidebar-item"><a href="../index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+            <li class="sidebar-item"><a href="book-appointment.html"><i class="bi bi-calendar-plus"></i><span>Book Appointment</span></a></li>
+            <li class="sidebar-item"><a href="list-appointments.html"><i class="bi bi-calendar-event"></i><span>Appointment List</span></a></li>
+            <li class="sidebar-item"><a href="doctor-slots.html"><i class="bi bi-clock"></i><span>Doctor Slots</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-content">
+        <!-- HEADER -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border rounded-3 p-3 mb-4 shadow-sm">
+            <div class="container-fluid">
+                <button class="btn btn-light sidebar-toggle-btn border d-lg-none me-2"><i class="bi bi-list"></i></button>
+                <span class="navbar-brand fw-bold text-primary mb-0">Reschedule Appointment Visit</span>
+            </div>
+        </nav>
+
+        <div class="card metric-card p-4">
+            <h5 class="fw-bold text-dark mb-4">Edit Visit Time Form</h5>
+            <form id="rescheduleForm">
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-6">
+                        <label class="med-form-label" for="appt-doctor">Select Physician <span class="text-danger">*</span></label>
+                        <select id="appt-doctor" class="form-select" required>
+                            <option value="Dr. Gregory House">Dr. Gregory House (Cardiology)</option>
+                            <option value="Dr. Addison Montgomery">Dr. Addison Montgomery (Obstetrics)</option>
+                            <option value="Dr. John Watson">Dr. John Watson (General Medicine)</option>
+                            <option value="Dr. Meredith Grey">Dr. Meredith Grey (Orthopedics)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-6">
+                        <label class="med-form-label" for="appt-date">Appointment Date <span class="text-danger">*</span></label>
+                        <input type="date" id="appt-date" class="form-control" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="med-form-label" for="appt-time">Appointment Time <span class="text-danger">*</span></label>
+                        <select id="appt-time" class="form-select" required>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 border-top pt-3">
+                    <button type="button" onclick="history.back()" class="btn btn-outline-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Reschedule visit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../common/js/mock-data.js"></script>
+    <script src="../../common/js/main.js"></script>
+    <script src="../js/appointment-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Workspace - CareRecords</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../common/css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">CareRecords Basic</div>
+        <ul class="sidebar-menu">
+           
+            <li class="menu-header">Appointment Scheduling</li>
+            <li class="sidebar-item"><a href="index.html" class="active"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+            <li class="sidebar-item"><a href="pages/book-appointment.html"><i class="bi bi-calendar-plus"></i><span>Book Appointment</span></a></li>
+            <li class="sidebar-item"><a href="pages/list-appointments.html"><i class="bi bi-calendar-event"></i><span>Appointment List</span></a></li>
+            <li class="sidebar-item"><a href="pages/doctor-slots.html"><i class="bi bi-clock"></i><span>Doctor Slots</span></a></li>
+
+            <li class="menu-header">Other Modules</li>
+            <li class="sidebar-item"><a href="../module1-patient-management/index.html"><i class="bi bi-people"></i><span>Patients</span></a></li>
+            <li class="sidebar-item"><a href="../module3-ehr-management/index.html"><i class="bi bi-file-medical"></i><span>EHR Records</span></a></li>
+            <li class="sidebar-item"><a href="../module4-prescription-management/index.html"><i class="bi bi-capsule"></i><span>Prescriptions</span></a></li>
+            <li class="sidebar-item"><a href="../module5-billing-management/index.html"><i class="bi bi-receipt"></i><span>Billing & Claims</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-content">
+        <!-- HEADER -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border rounded-3 p-3 mb-4 shadow-sm">
+            <div class="container-fluid">
+                <button class="btn btn-light sidebar-toggle-btn border d-lg-none me-2"><i class="bi bi-list"></i></button>
+                <span class="navbar-brand fw-bold text-primary mb-0">Module 2: Visit Coordination Workspace</span>
+            </div>
+        </nav>
+
+        <h2 class="fw-bold mb-1">Appointment Dashboard</h2>
+        <p class="text-secondary mb-4">Manage visit reservations, look up doctor slots availability, and review clinic schedules.</p>
+
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-md-4">
+                <div class="card metric-card p-4 text-center">
+                    <h6 class="text-secondary fw-bold text-uppercase small">Total Appointments</h6>
+                    <h2 class="fw-bold text-dark mt-2 mb-0" id="widget-total-appts">0</h2>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card metric-card p-4 text-center">
+                    <h6 class="text-secondary fw-bold text-uppercase small">Booked (Pending) Visits</h6>
+                    <h2 class="fw-bold text-warning mt-2 mb-0" id="widget-booked-appts">0</h2>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card metric-card p-4 text-center">
+                    <h6 class="text-secondary fw-bold text-uppercase small">Completed Visits</h6>
+                    <h2 class="fw-bold text-success mt-2 mb-0" id="widget-completed-appts">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card metric-card p-4 mb-4">
+            <h5 class="fw-bold text-dark mb-4">Quick Schedulers</h5>
+            <div class="row g-3">
+                <div class="col-12 col-sm-4">
+                    <a href="pages/book-appointment.html" class="btn btn-outline-primary w-100 py-3 d-flex flex-column align-items-center gap-2">
+                        <i class="bi bi-calendar-plus fs-2"></i>
+                        <span>Book Appointment Slot</span>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <a href="pages/list-appointments.html" class="btn btn-outline-success w-100 py-3 d-flex flex-column align-items-center gap-2">
+                        <i class="bi bi-calendar-event fs-2"></i>
+                        <span>Explore Appointment Roster</span>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <a href="pages/doctor-slots.html" class="btn btn-outline-info w-100 py-3 d-flex flex-column align-items-center gap-2 text-white">
+                        <i class="bi bi-clock fs-2"></i>
+                        <span>Check Doctor Availability</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../common/js/mock-data.js"></script>
+    <script src="../common/js/main.js"></script>
+    <script src="js/appointment-app.js"></script>
+</body>
+
+</html>
