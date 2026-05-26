@@ -1,0 +1,42 @@
+/* Billing Invoice & Payments desk CSS Styles */
+
+.invoice-badge {
+    padding: 0.35em 0.65em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 50rem;
+}
+
+.invoice-badge.Paid {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.invoice-badge.Pending {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.invoice-badge.Overdue {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.invoice-print-sheet {
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.invoice-header-line {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1.5rem;
+}
+
+.bill-total-row {
+    background-color: #f8fafc;
+    border-top: 2px solid var(--border-color);
+    font-weight: bold;
+}
