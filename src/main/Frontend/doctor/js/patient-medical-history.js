@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const timelineContainer = document.getElementById("timelineContainer");
     const profileCard = document.getElementById("historyProfileCard");
 
-    // Load patients dropdown
     const patients = window.HospitalStore.getPatients();
     if (patientSelect) {
         patients.forEach(p => {

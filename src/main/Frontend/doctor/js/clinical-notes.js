@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const notesTimeline = document.getElementById("notesTimeline");
     const saveNoteForm = document.getElementById("saveNoteForm");
 
+
     // Load patients dropdown
     const patients = window.HospitalStore.getPatients();
     if (patientSelect) {

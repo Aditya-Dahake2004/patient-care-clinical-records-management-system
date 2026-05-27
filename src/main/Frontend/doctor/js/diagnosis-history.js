@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const diagnosisTableBody = document.getElementById("diagnosisTableBody");
     const searchInput = document.getElementById("searchDiagnosis");
 
+
     function renderDiagnoses() {
         const diags = window.HospitalStore.getDiagnoses();
         const query = searchInput ? searchInput.value.toLowerCase() : "";

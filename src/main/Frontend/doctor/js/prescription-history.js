@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("HospitalStore utility missing!");
         return;
     }
-
     const prescriptionTableBody = document.getElementById("prescriptionTableBody");
     const searchInput = document.getElementById("searchPrescription");
 
