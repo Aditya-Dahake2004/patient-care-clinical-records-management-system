@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment List - Patient Care System</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Appointment List - CareRecord</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Global CSS -->
     <link href="../../common/css/common.css" rel="stylesheet">
-    <!-- Specific CSS -->
-    <link href="../css/appointment.css" rel="stylesheet">
+    <link href="../css/appointment-list.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
@@ -25,19 +21,10 @@
                     <i class="bi bi-grid-1x2-fill"></i> Dashboard
                 </a>
                 <a href="add-patient.html" class="list-group-item">
-                    <i class="bi bi-person-plus-fill"></i> Add Patient
-                </a>
-                <a href="patient-list.html" class="list-group-item">
-                    <i class="bi bi-file-earmark-person"></i> Patient List
-                </a>
-                <a href="search-patient.html" class="list-group-item">
-                    <i class="bi bi-search"></i> Search Patient
-                </a>
-                <a href="book-appointment.html" class="list-group-item">
-                    <i class="bi bi-calendar-plus"></i> Book Appointment
+                    <i class="bi bi-person-fill-add"></i> Add Patient
                 </a>
                 <a href="appointment-list.html" class="list-group-item active">
-                    <i class="bi bi-calendar2-week"></i> Appointment List
+                    <i class="bi bi-calendar-event"></i> Appointment List
                 </a>
             </div>
             <div class="p-3 border-top border-secondary">
@@ -46,68 +33,45 @@
                 </a>
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-custom">
                 <div class="container-fluid">
                     <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
                         <i class="bi bi-justify"></i> Menu
                     </button>
-                    
-                    <span class="navbar-brand">Appointment Scheduler Records</span>
-
-                    <div class="ms-auto d-flex align-items-center">
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                
-                                <span class="d-none d-sm-inline text-dark fw-semibold">Sarah Jenkins</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="navbar-brand">Consultations Ledger</span>
                 </div>
             </nav>
 
-            <!-- Content Area -->
             <div class="container-fluid px-4 py-4">
                 <div class="card clinic-card p-4">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
                         <div class="d-flex flex-wrap gap-2 flex-grow-1">
-                            <input type="text" id="searchAppt" class="form-control" style="max-width: 350px;" placeholder="Search by patient, doctor, dept...">
+                            <input type="text" id="searchAppt" class="form-control" style="max-width: 320px;" placeholder="Search by patient name...">
                             <select id="filterStatus" class="form-select" style="max-width: 170px;">
-                                <option value="All">All Schedules</option>
-                                <option value="BOOKED">BOOKED</option>
-                                <option value="COMPLETED">COMPLETED</option>
-                                <option value="CANCELLED">CANCELLED</option>
+                                <option value="All">All Appointments</option>
+                                <option value="BOOKED">Booked</option>
+                                <option value="COMPLETED">Completed</option>
+                                <option value="CANCELLED">Cancelled</option>
                             </select>
                         </div>
-                        <a href="book-appointment.html" class="btn btn-primary">
-                            <i class="bi bi-calendar-plus me-1"></i> Book Appointment
-                        </a>
                     </div>
 
-                    <!-- Appointment Table -->
                     <div class="table-responsive">
                         <table class="table table-custom align-middle">
                             <thead>
                                 <tr>
-                                    <th>Appt ID</th>
                                     <th>Patient Name</th>
-                                    <th>Doctor & Speciality</th>
-                                    <th>Scheduled Date</th>
+                                    <th>Physician MD</th>
+                                    <th>Department</th>
+                                    <th>Date</th>
                                     <th>Time Slot</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="apptTableBody">
+                            <tbody id="apptsTableBody">
                                 <!-- Loaded dynamically via appointment-list.js -->
                             </tbody>
                         </table>
@@ -115,24 +79,16 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <footer class="text-center mt-auto">
                 <div class="container">
-                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System.</p>
                 </div>
             </footer>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 
-    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Shared JS -->
-    <script src="../../common/js/common.js"></script>
-    <!-- Store Sync -->
-    <script src="../js/store.js"></script>
-    <!-- Appointment List JS -->
+    <script src="../../receptionist/js/store.js"></script>
     <script src="../js/appointment-list.js"></script>
 </body>
 </html>
