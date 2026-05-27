@@ -1,68 +1,77 @@
 document.addEventListener("DOMContentLoaded", function() {
-    if (!window.HospitalStore) {
-        console.error("HospitalStore utility missing!");
-        return;
+    const menuToggle = document.getElementById("menu-toggle");
+    const wrapper = document.getElementById("wrapper");
+    if (menuToggle) {
+        menuToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            wrapper.classList.toggle("toggled");
+        });
     }
 
-    const apptTableBody = document.getElementById("apptTableBody");
+    const signOutBtn = document.getElementById("sign-out-btn");
+    if (signOutBtn) {
+        signOutBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (confirm("Are you sure you want to sign out?")) {
+                alert("Successfully signed out. Redirecting...");
+                window.location.href = "../../common/pages/home.html";
+            }
+        });
+    }
+
     const searchInput = document.getElementById("searchAppt");
-    const statusFilter = document.getElementById("filterStatus");
+    const statusSelect = document.getElementById("filterStatus");
 
     function renderAppointments() {
-        const appts = window.HospitalStore.getAppointments();
-        const query = searchInput ? searchInput.value.toLowerCase() : "";
-        const statusVal = statusFilter ? statusFilter.value : "All";
+        if (!window.HospitalStore) return;
+        const appts = window.HospitalStore.getAppointments() || [];
+        const tbody = document.getElementById("apptsTableBody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
 
-        apptTableBody.innerHTML = "";
+        const query = searchInput.value.toLowerCase().trim();
+        const statusVal = statusSelect.value;
 
         const filtered = appts.filter(a => {
-            const matchesQuery = a.patientName.toLowerCase().includes(query) || a.doctorName.toLowerCase().includes(query) || a.department.toLowerCase().includes(query);
+            const matchesSearch = a.patientName.toLowerCase().includes(query) || 
+                                 a.doctorName.toLowerCase().includes(query);
             const matchesStatus = statusVal === "All" || a.status === statusVal;
-            return matchesQuery && matchesStatus;
+            return matchesSearch && matchesStatus;
         });
 
         if (filtered.length === 0) {
-            apptTableBody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">No appointments scheduled matching the selected filters.</td></tr>`;
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        <i class="bi bi-calendar-x fs-2 d-block mb-2"></i>
+                        No scheduled appointments match search filters.
+                    </td>
+                </tr>
+            `;
             return;
         }
 
-        // Sort descending so recent/upcoming appear nicely
-        filtered.reverse().forEach(a => {
-            let statusBadge = "bg-primary-subtle text-primary";
-            if (a.status === "COMPLETED") statusBadge = "bg-success-subtle text-success";
-            if (a.status === "CANCELLED") statusBadge = "bg-danger-subtle text-danger";
+        filtered.forEach(a => {
+            const tr = document.createElement("tr");
 
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td class="fw-semibold text-primary">#APT-0${a.id}</td>
-                <td class="fw-bold">${a.patientName}</td>
-                <td>
-                    <div class="fw-semibold">${a.doctorName}</div>
-                    <div class="text-muted small">${a.department}</div>
-                </td>
+            let statusBadgeClass = "bg-primary";
+            if (a.status === "COMPLETED") statusBadgeClass = "bg-success";
+            else if (a.status === "CANCELLED") statusBadgeClass = "bg-danger";
+
+            tr.innerHTML = `
+                <td><strong>${a.patientName}</strong></td>
+                <td>${a.doctorName}</td>
+                <td><span class="badge bg-light text-dark border">${a.department}</span></td>
                 <td>${a.date}</td>
                 <td>${a.time}</td>
-                <td><span class="badge badge-custom ${statusBadge}">${a.status}</span></td>
-                <td>
-                    <div class="d-flex gap-1">
-                        <a href="appointment-details.html?id=${a.id}" class="btn btn-outline-primary btn-sm">
-                            <i class="bi bi-eye"></i> View
-                        </a>
-                        ${a.status === 'BOOKED' ? `
-                            <a href="reschedule-appointment.html?id=${a.id}" class="btn btn-outline-warning btn-sm text-dark">
-                                <i class="bi bi-calendar-event"></i> Reschedule
-                            </a>
-                        ` : ''}
-                    </div>
-                </td>
+                <td><span class="badge ${statusBadgeClass}">${a.status}</span></td>
             `;
-            apptTableBody.appendChild(row);
+            tbody.appendChild(tr);
         });
     }
 
     if (searchInput) searchInput.addEventListener("input", renderAppointments);
-    if (statusFilter) statusFilter.addEventListener("change", renderAppointments);
+    if (statusSelect) statusSelect.addEventListener("change", renderAppointments);
 
-    // Initial render
     renderAppointments();
 });
