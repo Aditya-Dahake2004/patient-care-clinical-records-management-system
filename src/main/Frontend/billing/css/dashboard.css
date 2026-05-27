@@ -1,27 +1,26 @@
-/* Doctor Dashboard Specific Styles */
+/* Billing Dashboard Specific Styles */
 
 .stat-box {
     border-left: 4px solid var(--primary-color);
 }
 
-.stat-box.patients {
-    border-left-color: var(--primary-color);
-}
-
-.stat-box.appointments {
-    border-left-color: #198754;
-}
-
-
-.stat-box.diagnoses {
-    border-left-color: #9333ea;
-}
-
-.stat-box.prescriptions {
+.stat-box.pending {
     border-left-color: #ffc107;
 }
 
-.quick-doctor-action {
+.stat-box.paid {
+    border-left-color: #198754;
+}
+
+.stat-box.claims {
+    border-left-color: #9333ea;
+}
+
+.stat-box.revenue {
+    border-left-color: #0d9488;
+}
+
+.quick-billing-action {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -35,7 +34,7 @@
     transition: all 0.2s ease;
 }
 
-.quick-doctor-action:hover {
+.quick-billing-action:hover {
     background-color: var(--primary-light);
     color: var(--primary-color);
     border-color: var(--primary-color);
