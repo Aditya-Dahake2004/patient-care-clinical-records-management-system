@@ -1,0 +1,5 @@
+/* Billing settings specific CSS styles */
+
+.settings-card {
+    border-left: 4px solid var(--primary-color);
+}
