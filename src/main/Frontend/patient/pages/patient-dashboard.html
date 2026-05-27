@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - CareRecord</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <link href="../css/patient-dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="patient-dashboard.html" class="list-group-item active">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="my-prescriptions.html" class="list-group-item">
+                    <i class="bi bi-prescription2"></i> My Prescriptions
+                </a>
+                <a href="my-bills.html" class="list-group-item">
+                    <i class="bi bi-credit-card"></i> My Bills
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    <span class="navbar-brand">Patient Wellness Center</span>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <!-- Welcome Banner -->
+                <div class="card clinic-card p-4 mb-4 text-white" style="background: linear-gradient(135deg, var(--primary-color) 0%, #0d9488 100%); border: none;">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 50px; height: 50px; font-size: 1.5rem;">JD</div>
+                        <div>
+                            <h3 class="fw-bold mb-1">Welcome back, John Doe</h3>
+                            <p class="mb-0 text-white-50">MRN: <strong>MRN-10824</strong> | Access your hospital clinical schedules and invoices safely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card clinic-card p-3">
+                            <h6 class="fw-bold text-uppercase text-muted mb-2">Upcoming Visits</h6>
+                            <h3 class="fw-bold" id="cntAppointments">1</h3>
+                            <p class="text-secondary small mb-0">Scheduled pediatric & wellness rounds.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card clinic-card p-3">
+                            <h6 class="fw-bold text-uppercase text-muted mb-2">Active Prescriptions</h6>
+                            <h3 class="fw-bold" id="cntPrescriptions">0</h3>
+                            <p class="text-secondary small mb-0">Medicine orders queued at pharmacy checkout.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card clinic-card p-3">
+                            <h6 class="fw-bold text-uppercase text-muted mb-2">Pending Bills</h6>
+                            <h3 class="fw-bold" id="cntBills">0</h3>
+                            <p class="text-secondary small mb-0">Outstanding invoice net liabilities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Left: Upcoming Consultation card -->
+                    <div class="col-lg-8">
+                        <div class="card clinic-card p-4 mb-4">
+                            <h5 class="fw-bold text-primary mb-3"><i class="bi bi-clock-history me-2"></i>Next Scheduled Appointment</h5>
+                            <div id="nextApptContainer">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Quick Actions -->
+                    <div class="col-lg-4">
+                        <div class="card clinic-card p-4 text-center">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-lightning-fill me-2"></i>Quick Links</h5>
+                            <hr>
+                            <a href="my-prescriptions.html" class="btn btn-primary w-100 mb-2">
+                                <i class="bi bi-prescription2 me-1"></i> Look Up My Prescriptions
+                            </a>
+                            <a href="my-bills.html" class="btn btn-outline-secondary w-100">
+                                <i class="bi bi-credit-card me-1"></i> View My Invoices
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../receptionist/js/store.js"></script>
+    <script src="../js/patient-dashboard.js"></script>
+</body>
+</html>
