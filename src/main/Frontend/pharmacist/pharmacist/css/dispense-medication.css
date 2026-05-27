@@ -1,0 +1,11 @@
+.clinic-card {
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+.med-row {
+    border-bottom: 1px dashed var(--border-color);
+    padding: 8px 0;
+}
+.med-row:last-child {
+    border-bottom: none;
+}

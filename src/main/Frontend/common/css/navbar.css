@@ -1,0 +1,12 @@
+/* Shared navbar styles */
+.public-nav {
+    border-bottom: 1px solid var(--border-color);
+}
+.public-nav .nav-link {
+    font-weight: 500;
+    color: var(--text-main);
+    transition: color 0.2s ease;
+}
+.public-nav .nav-link:hover {
+    color: var(--primary-color);
+}
