@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Encounter Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        .form-container { border: 1px solid #ccc; padding: 20px; width: 400px; border-radius: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { width: 95%; padding: 8px; }
+        button { background-color: #28a745; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2>Create Clinical Encounter</h2>
+
+<div class="form-container">
+    <div th:if="${successMessage}" style="background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+        <h4 style="color: #0b7dda; margin-top: 0;" th:text="${successMessage}">Success Status</h4>
+        <p style="margin: 5px 0;"><strong>Patient ID:</strong> <span th:text="${savedPatientId}"></span></p>
+        <p style="margin: 5px 0;"><strong>Diagnosis Code:</strong> <span th:text="${savedDiagnosisCode}"></span></p>
+        <p style="margin: 5px 0;"><strong>Clinical Notes:</strong> <span th:text="${savedNotes}"></span></p>
+    </div>
+
+    <form th:action="@{/varun}" th:object="${clinicalRecord}" method="post">
+        <div class="form-group">
+            <label>Patient ID:</label>
+            <input type="number" th:field="*{patientId}" required />
+        </div>
+        <div class="form-group">
+            <label>Diagnosis Code:</label>
+            <input type="text" th:field="*{diagnosisCode}" required />
+        </div>
+        <div class="form-group">
+            <label>Clinical Notes:</label>
+            <input type="text" th:field="*{clinicalNotes}" required />
+        </div>
+        <button type="submit">Submit Encounter</button>
+    </form>
+</div>
+
+</body>
+</html>

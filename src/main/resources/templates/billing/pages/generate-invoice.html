@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Invoice - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/invoice.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="billing-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="generate-invoice.html" class="list-group-item active">
+                    <i class="bi bi-file-earmark-plus"></i> Generate Invoice
+                </a>
+                <a href="insurance-claims.html" class="list-group-item">
+                    <i class="bi bi-shield-plus"></i> Insurance Claims
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Outpatient Invoicing Desk</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Lavanya</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Accounts Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="row g-4">
+                    <!-- Billing form desk -->
+                    <div class="col-12 col-lg-7">
+                        <div class="card clinic-card p-4">
+                            <h2 class="h4 fw-bold text-dark mb-4">Generate Patient Billing Statement</h2>
+                            
+                            <form id="generateInvoiceForm">
+                                <!-- Select Patient -->
+                                <div class="mb-4">
+                                    <label class="form-label" for="invoicePatient">Patient Record <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="invoicePatient" required>
+                                        <option value="" disabled selected>Select Active Patient...</option>
+                                        <!-- Loaded Dynamically -->
+                                    </select>
+                                </div>
+
+                                <hr class="my-4">
+                                <h3 class="h5 fw-bold text-primary mb-3">1. Service & Fee Charges</h3>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="chargeConsult">Consultation Fee</label>
+                                        <input type="number" class="form-control" id="chargeConsult" value="100" min="0">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="chargeMedicine">Pharmacy Charges</label>
+                                        <input type="number" class="form-control" id="chargeMedicine" value="80" min="0">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label mb-1" for="chargeService">Specialized Laboratory/Service Charges</label>
+                                        <input type="number" class="form-control" id="chargeService" value="0" min="0">
+                                    </div>
+                                </div>
+
+                                <h3 class="h5 fw-bold text-primary mb-3">2. Payer & Pre-Authorization Details</h3>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="insuranceProvider">Payer Provider</label>
+                                        <select class="form-select" id="insuranceProvider">
+                                            <option value="Aetna Healthcare">Aetna Healthcare</option>
+                                            <option value="Medicaid Payer">Medicaid Payer</option>
+                                            <option value="Blue Cross Shield">Blue Cross Shield</option>
+                                            <option value="Cigna Partners">Cigna Partners</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="chargeInsurance">Approved Pre-auth Coverage Amount</label>
+                                        <input type="number" class="form-control" id="chargeInsurance" value="150" min="0">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 justify-content-end border-top pt-3">
+                                    <button type="button" class="btn btn-outline-secondary px-4" onclick="window.history.back()">Cancel</button>
+                                    <button type="submit" class="btn btn-primary px-4">Generate Statement</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Live Breakdown Preview Panel -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card clinic-card p-4 h-100">
+                            <h3 class="h5 fw-bold text-dark mb-4">Statement Breakdown Summary</h3>
+                            <div class="card bg-light p-4 h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-muted small fw-semibold uppercase">Category</span>
+                                        <span class="text-muted small fw-semibold uppercase">Amount</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-dark small">Clinical subtotal</span>
+                                        <span class="text-dark fw-bold small" id="summarySubtotal">$180.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-dark small">Estimated Tax (Fixed 10%)</span>
+                                        <span class="text-dark fw-bold small" id="summaryTax">$18.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-dark small">Gross statement Total</span>
+                                        <span class="text-dark fw-bold small" id="summaryTotal">$198.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2 text-primary font-semibold">
+                                        <span class="small">Approved Payer Pre-auth</span>
+                                        <span class="fw-bold small" id="summaryInsurance">($150.00)</span>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-3 d-flex justify-content-between align-items-center mt-4">
+                                    <span class="h6 fw-bold text-dark mb-0">Total Patient Payable</span>
+                                    <span class="h4 fw-bold text-danger mb-0" id="summaryPayable">$48.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Generate Invoice JS -->
+    <script src="../js/generate-invoice.js"></script>
+</body>
+</html>
