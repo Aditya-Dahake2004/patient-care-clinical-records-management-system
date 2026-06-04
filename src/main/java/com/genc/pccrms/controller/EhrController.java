@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller // <--- CRITICAL: If this is missing, Spring ignores this file
+@Controller
 public class EhrController {
 
-    @GetMapping("/varun") // <--- CRITICAL: Must exactly match the URL
+    @GetMapping("/varun")
     public String showEncounterForm(Model model) {
         model.addAttribute("clinicalRecord", new ClinicalRecord());
-        return "index"; // <--- Correctly points to templates/index.html
+        return "index";
     }
 
     @PostMapping("/varun")
