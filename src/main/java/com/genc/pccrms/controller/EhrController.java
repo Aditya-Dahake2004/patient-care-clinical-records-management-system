@@ -15,18 +15,16 @@ public class EhrController {
         model.addAttribute("clinicalRecord", new ClinicalRecord());
         return "index";
     }
-
     @PostMapping("/varun")
     public String submitEncounterForm(@ModelAttribute ClinicalRecord clinicalRecord, Model model) {
         System.out.println("Form submitted for Patient ID: " + clinicalRecord.getPatientId());
-
         model.addAttribute("successMessage", "Encounter saved successfully!");
         model.addAttribute("savedPatientId", clinicalRecord.getPatientId());
         model.addAttribute("savedDiagnosisCode", clinicalRecord.getDiagnosisCode());
         model.addAttribute("savedNotes", clinicalRecord.getClinicalNotes());
 
         model.addAttribute("clinicalRecord", new ClinicalRecord());
-
+        // html file
         return "index";
     }
 }
