@@ -1,4 +1,4 @@
-package com.genc.pharmacist.model;
+package com.genc.pccrms.model;
 
 import jakarta.persistence.*;
 
