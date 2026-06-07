@@ -24,7 +24,7 @@ public class EhrController {
         model.addAttribute("savedNotes", clinicalRecord.getClinicalNotes());
 
         model.addAttribute("clinicalRecord", new ClinicalRecord());
-        // html file
+        // html file index
         return "index";
     }
 }
