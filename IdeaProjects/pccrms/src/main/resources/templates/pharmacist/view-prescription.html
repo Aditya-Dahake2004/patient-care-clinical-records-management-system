@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!-- View Prescription Details Page -->
+    <title>View Prescription</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar-hospital">
+    <div class="brand">Patient Care <span>& Clinical Records</span></div>
+    <div class="nav-right">
+        <span class="nav-user">Pharmacist</span>
+        <form method="post" action="/logout" style="display:inline;">
+            <input type="hidden" th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="dashboard-wrapper">
+    <div class="sidebar">
+        <div class="sidebar-title">Menu</div>
+        <a href="/pharmacist/dashboard"
+           class="nav-item">🏠 Dashboard</a>
+        <a href="/pharmacist/prescriptions"
+           class="nav-item active">💊 All Prescriptions</a>
+        <a href="/pharmacist/prescriptions?status=PENDING"
+           class="nav-item">⏳ Pending</a>
+        <a href="/pharmacist/drug-interactions"
+           class="nav-item">⚠️ Drug Interactions</a>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h2>Prescription Details</h2>
+            <p>Full prescription and patient medication history</p>
+        </div>
+
+        <!-- Prescription Card -->
+        <div class="card-hospital">
+            <div style="display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  margin-bottom:1rem;">
+                <h3 style="margin:0; border:none; padding:0;">
+                    Prescription Info
+                </h3>
+                <span th:class="${'badge badge-' +
+              prescription.dispenseStatus.name().toLowerCase()}"
+                      th:text="${prescription.dispenseStatus}"></span>
+            </div>
+
+            <div style="display:grid;
+                  grid-template-columns:repeat(3,1fr);
+                  gap:1rem;">
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">Patient</p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.patient.fullName}"></p>
+                </div>
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">MRN</p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.patient.mrn}"></p>
+                </div>
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">
+                        Prescribed By
+                    </p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.doctor.fullName}"></p>
+                </div>
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">Medication</p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.medicationName}"></p>
+                </div>
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">Dosage</p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.dosage}"></p>
+                </div>
+                <div>
+                    <p style="font-size:0.82rem;
+                    color:var(--gray-600);">Frequency</p>
+                    <p style="font-weight:600;"
+                       th:text="${prescription.frequency}"></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display:flex; gap:1rem;
+                  margin-top:1.25rem;"
+                 th:if="${prescription.dispenseStatus.name()
+                   == 'PENDING'}">
+                <form th:action="@{/pharmacist/prescriptions/
+              dispense/{id}
+              (id=${prescription.prescriptionId})}"
+                      method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <button type="submit"
+                            class="btn-primary-hospital"
+                            style="width:auto;
+                         padding:0.6rem 2rem;">
+                        Dispense Medication
+                    </button>
+                </form>
+                <form th:action="@{/pharmacist/prescriptions/
+              cancel/{id}
+              (id=${prescription.prescriptionId})}"
+                      method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <button type="submit"
+                            class="btn-danger-hospital"
+                            onclick="return confirm(
+                    'Cancel this prescription?')">
+                        Cancel Prescription
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Patient's Other Medications -->
+        <div class="card-hospital">
+            <h3>Patient's Other Medications
+                <span style="font-size:0.8rem;
+                     font-weight:400;
+                     color:var(--gray-600);">
+          (Drug Interaction Reference)
+        </span>
+            </h3>
+
+            <div th:if="${#lists.isEmpty(patientPrescriptions)}"
+                 class="alert alert-info">
+                No other medications on record for this patient.
+            </div>
+
+            <table class="table-hospital"
+                   th:if="${!#lists.isEmpty(
+                       patientPrescriptions)}">
+                <thead>
+                <tr>
+                    <th>Medication</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${patientPrescriptions}"
+                    th:if="${p.prescriptionId !=
+                       prescription.prescriptionId}">
+                    <td th:text="${p.medicationName}"></td>
+                    <td th:text="${p.dosage}"></td>
+                    <td th:text="${p.frequency}"></td>
+                    <td>
+              <span th:class="${'badge badge-' +
+                    p.dispenseStatus.name().toLowerCase()}"
+                    th:text="${p.dispenseStatus}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info"
+                 style="margin-top:1rem;">
+                ⚠️ Please verify for potential drug interactions
+                before dispensing. Consult a physician if
+                unsure about combination medications.
+            </div>
+        </div>
+
+        <a href="/pharmacist/prescriptions"
+           class="btn-secondary-hospital">← Back</a>
+
+    </div>
+</div>
+
+</body>
+</html>
