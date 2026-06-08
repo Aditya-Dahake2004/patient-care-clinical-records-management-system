@@ -1,0 +1,13 @@
+/* Patient prescriptions list and details styling */
+.prescription-card {
+    border-top: 3px solid var(--accent-teal);
+}
+
+.prescription-item-row {
+    border-bottom: 1px dashed var(--border-color);
+    padding: 10px 0;
+}
+
+.prescription-item-row:last-child {
+    border-bottom: none;
+}

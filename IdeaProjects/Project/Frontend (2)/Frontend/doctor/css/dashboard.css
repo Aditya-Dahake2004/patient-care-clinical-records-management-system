@@ -1,0 +1,41 @@
+/* Doctor Dashboard Specific Styles */
+
+.stat-box {
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-box.patients {
+    border-left-color: var(--primary-color);
+}
+
+.stat-box.appointments {
+    border-left-color: #198754;
+}
+
+.stat-box.diagnoses {
+    border-left-color: #9333ea;
+}
+
+.stat-box.prescriptions {
+    border-left-color: #ffc107;
+}
+
+.quick-doctor-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 550;
+    transition: all 0.2s ease;
+}
+
+.quick-doctor-action:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/manage-staff.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="admin-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="manage-doctors.html" class="list-group-item">
+                    <i class="bi bi-person-badge"></i> Manage Doctors
+                </a>
+                <a href="manage-staff.html" class="list-group-item active">
+                    <i class="bi bi-people"></i> Manage Staff
+                </a>
+                <a href="reports.html" class="list-group-item">
+                    <i class="bi bi-graph-up-arrow"></i> Reports
+                </a>
+                <a href="settings.html" class="list-group-item">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Manage Staff</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Dr. Alex Mercer</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="card clinic-card p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                        <div class="d-flex flex-wrap gap-2 flex-grow-1">
+                            <input type="text" id="searchStaff" class="form-control search-container" placeholder="Search staff by name or email...">
+                            <select id="filterRole" class="form-select filter-select">
+                                <option value="All">All Roles</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="Nurse">Nurse</option>
+                                <option value="Pharmacist">Pharmacist</option>
+                                <option value="Billing Officer">Billing Officer</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="openAddStaffModalBtn" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                            <i class="bi bi-plus-lg me-1"></i> Add Staff
+                        </button>
+                    </div>
+
+                    <!-- Staff Table -->
+                    <div class="table-responsive">
+                        <table class="table table-custom align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Staff ID</th>
+                                    <th>Name & Contact</th>
+                                    <th>Role</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="staffTableBody">
+                                <!-- Loaded dynamically via manage-staff.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Add/Edit Modal -->
+            <div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold" id="modalTitle">Add New Staff Member</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="staffForm">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="staffName" class="form-label fw-semibold">Staff Full Name</label>
+                                    <input type="text" class="form-control" id="staffName" placeholder="Marcus Vance" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="staffRole" class="form-label fw-semibold">Hospital Role</label>
+                                    <select class="form-select" id="staffRole" required>
+                                        <option value="Receptionist">Receptionist</option>
+                                        <option value="Nurse">Nurse</option>
+                                        <option value="Pharmacist">Pharmacist</option>
+                                        <option value="Billing Officer">Billing Officer</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="staffEmail" class="form-label fw-semibold">Email Address</label>
+                                    <input type="email" class="form-control" id="staffEmail" placeholder="m.vance@hospital.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="staffPhone" class="form-label fw-semibold">Phone Contact</label>
+                                    <input type="tel" class="form-control" id="staffPhone" placeholder="+1 555-0211" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="staffStatus" class="form-label fw-semibold">Employment Status</label>
+                                    <select class="form-select" id="staffStatus">
+                                        <option value="Active">Active</option>
+                                        <option value="On Leave">On Leave</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Member</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Staff Specific JS -->
+    <script src="../js/manage-staff.js"></script>
+</body>
+</html>

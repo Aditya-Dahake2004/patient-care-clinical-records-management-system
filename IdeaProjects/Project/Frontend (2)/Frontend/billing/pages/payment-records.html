@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Records - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/invoice.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="billing-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="generate-invoice.html" class="list-group-item">
+                    <i class="bi bi-file-earmark-plus"></i> Generate Invoice
+                </a>
+                <a href="invoice-list.html" class="list-group-item">
+                    <i class="bi bi-receipt"></i> Invoice List
+                </a>
+                <a href="payment-records.html" class="list-group-item active">
+                    <i class="bi bi-cash-coin"></i> Payment Records
+                </a>
+                <a href="insurance-claims.html" class="list-group-item">
+                    <i class="bi bi-shield-plus"></i> Insurance Claims
+                </a>
+                <a href="payment-history.html" class="list-group-item">
+                    <i class="bi bi-clock-history"></i> Payment History
+                </a>
+                <a href="billing-settings.html" class="list-group-item">
+                    <i class="bi bi-gear-fill"></i> Settings
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Accounts Checkout Desk</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Clara Oswald</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Accounts Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="row g-4">
+                    <!-- Form layout -->
+                    <div class="col-12 col-lg-7">
+                        <div class="card clinic-card p-4">
+                            <h2 class="h4 fw-bold text-dark mb-4">Record Transaction Payment</h2>
+                            
+                            <form id="checkoutForm">
+                                <!-- Select pending invoice -->
+                                <div class="mb-4">
+                                    <label class="form-label" for="checkoutInvoice">Select Pending Invoice Statement <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="checkoutInvoice" required>
+                                        <option value="" disabled selected>Select Pending Statements...</option>
+                                        <!-- Loaded Dynamically -->
+                                    </select>
+                                </div>
+
+                                <hr class="my-4">
+                                <h3 class="h5 fw-bold text-primary mb-3">1. Payment Method & Value</h3>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="paymentMethod">Transaction Method <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="paymentMethod" required>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Card">Credit/Debit Card</option>
+                                            <option value="UPI">UPI Transaction</option>
+                                            <option value="Insurance">Insurance Pre-Auth</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="paymentAmount">Amount to Pay ($) <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="paymentAmount" step="0.01" min="0" required>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 justify-content-end border-top pt-3">
+                                    <button type="button" class="btn btn-outline-secondary px-4" onclick="window.history.back()">Cancel</button>
+                                    <button type="submit" class="btn btn-primary px-4">Submit Checkout</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Preview Panel -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card clinic-card p-4 h-100">
+                            <h3 class="h5 fw-bold text-dark mb-4">Invoice Summary Card</h3>
+                            <div id="checkoutSummaryCard" class="card bg-light p-4 h-100 d-flex flex-column justify-content-between d-none">
+                                <div>
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-muted small fw-semibold uppercase">Category</span>
+                                        <span class="text-muted small fw-semibold uppercase">Details</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-dark small">Invoice Number</span>
+                                        <span class="text-primary fw-bold small" id="lblInvNo">-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-dark small">Patient Name</span>
+                                        <span class="text-dark fw-bold small" id="lblPatient">-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-dark small">Gross total (with tax)</span>
+                                        <span class="text-dark fw-bold small" id="lblGross">-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2 text-primary font-semibold">
+                                        <span class="small">Approved Pre-auth Payer</span>
+                                        <span class="fw-bold small" id="lblInsurance">-</span>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-3 d-flex justify-content-between align-items-center mt-4">
+                                    <span class="h6 fw-bold text-dark mb-0">Patient Amount Due</span>
+                                    <span class="h4 fw-bold text-danger mb-0" id="lblPayable">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Payment Records JS -->
+    <script src="../js/payment-records.js"></script>
+</body>
+</html>

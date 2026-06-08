@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Notes - Patient Care System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Global CSS -->
+    <link href="../../common/css/common.css" rel="stylesheet">
+    <!-- Specific CSS -->
+    <link href="../css/clinical.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-white">
+                <i class="bi bi-heart-pulse-fill text-info me-2"></i>CareRecord
+            </div>
+            <div class="list-group list-group-flush flex-grow-1">
+                <a href="doctor-dashboard.html" class="list-group-item">
+                    <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                </a>
+                <a href="todays-patients.html" class="list-group-item">
+                    <i class="bi bi-calendar2-heart"></i> Today's Patients
+                </a>
+                <a href="patient-medical-history.html" class="list-group-item">
+                    <i class="bi bi-clock-history"></i> Medical History
+                </a>
+                <a href="create-diagnosis.html" class="list-group-item">
+                    <i class="bi bi-patch-question"></i> Create Diagnosis
+                </a>
+                <a href="clinical-notes.html" class="list-group-item active">
+                    <i class="bi bi-journal-medical"></i> Clinical Notes
+                </a>
+                <a href="create-prescription.html" class="list-group-item">
+                    <i class="bi bi-prescription2"></i> Create Prescription
+                </a>
+                <a href="prescription-history.html" class="list-group-item">
+                    <i class="bi bi-receipt-cutoff"></i> Prescription History
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <a href="#" id="sign-out-btn" class="list-group-item py-2 text-danger">
+                    <i class="bi bi-box-arrow-left"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-custom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm me-3" id="menu-toggle">
+                        <i class="bi bi-justify"></i> Menu
+                    </button>
+                    
+                    <span class="navbar-brand">Consultation Notes desk</span>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                                <span class="d-none d-sm-inline text-dark fw-semibold">Dr. Emily Blunt</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Clinical Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" id="sign-out-btn-dropdown"><i class="bi bi-box-arrow-left me-2"></i> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="container-fluid px-4 py-4">
+                <div class="card clinic-card p-4 mb-4">
+                    <div class="d-flex flex-wrap align-items-center gap-3">
+                        <label class="form-label fw-bold text-dark mb-0" for="notesPatientSelect">Select Outpatient Chart</label>
+                        <select id="notesPatientSelect" class="form-select flex-grow-1" style="max-width: 450px;">
+                            <option value="" selected>Choose Patient...</option>
+                            <!-- Dynamically loaded -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Timeline showing existing notes -->
+                    <div class="col-12 col-lg-7">
+                        <div class="card clinic-card p-4">
+                            <h3 class="h5 fw-bold text-dark mb-4">Chronological Intake Logs</h3>
+                            <div id="notesTimeline">
+                                <!-- Loaded dynamically via clinical-notes.js -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intake entry form -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card clinic-card p-4">
+                            <h3 class="h5 fw-bold text-dark mb-4">Record New Intake consultation</h3>
+                            <form id="saveNoteForm">
+                                <!-- Vitals Inputs -->
+                                <h4 class="h6 fw-bold text-primary mb-3">1. Patient Vitals</h4>
+                                <div class="row g-2 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="vitalTemp">Temperature</label>
+                                        <input type="text" class="form-control" id="vitalTemp" placeholder="e.g. 98.6°F">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="vitalBP">Blood Pressure</label>
+                                        <input type="text" class="form-control" id="vitalBP" placeholder="e.g. 120/80 mmHg">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="vitalHR">Heart Rate</label>
+                                        <input type="text" class="form-control" id="vitalHR" placeholder="e.g. 72 bpm">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label mb-1" for="vitalRR">Respiration Rate</label>
+                                        <input type="text" class="form-control" id="vitalRR" placeholder="e.g. 16 bpm">
+                                    </div>
+                                </div>
+
+                                <!-- Note Textarea -->
+                                <h4 class="h6 fw-bold text-primary mb-2">2. Consultation Summary Notes</h4>
+                                <div class="mb-4">
+                                    <textarea class="form-control" id="clinicalNoteText" rows="5" placeholder="Record complete checkup details, intake summaries, symptom reviews..." required></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Save Consultation Note</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-auto">
+                <div class="container">
+                    <p class="mb-0">© 2026 Patient Care & Clinical Records Management System. Designed for hospital administration.</p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared JS -->
+    <script src="../../common/js/common.js"></script>
+    <!-- Store Sync -->
+    <script src="../../receptionist/js/store.js"></script>
+    <!-- Clinical Notes Specific JS -->
+    <script src="../js/clinical-notes.js"></script>
+</body>
+</html>

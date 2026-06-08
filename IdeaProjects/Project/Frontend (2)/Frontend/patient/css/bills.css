@@ -1,0 +1,12 @@
+/* Patient bills styling */
+.bill-stat-card {
+    border-left: 4px solid var(--accent-teal);
+}
+
+.bill-stat-card.overdue {
+    border-left-color: #dc3545;
+}
+
+.bill-stat-card.paid {
+    border-left-color: var(--secondary-color);
+}

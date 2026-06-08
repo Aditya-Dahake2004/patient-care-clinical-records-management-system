@@ -1,0 +1,13 @@
+/* Pharmacy Dispense desk CSS Styles */
+
+.presc-review-sheet {
+    border: 2px dashed var(--border-color);
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.dispense-summary-box {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+}

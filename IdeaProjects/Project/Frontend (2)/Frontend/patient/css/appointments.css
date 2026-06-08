@@ -1,0 +1,18 @@
+/* Patient appointments list styling */
+.appt-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.appt-card.completed {
+    border-left-color: var(--secondary-color);
+}
+
+.appt-card.cancelled {
+    border-left-color: #dc3545;
+}
+
+.doctor-badge {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    font-weight: 500;
+}
